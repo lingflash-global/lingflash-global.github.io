@@ -3,100 +3,297 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LingoFlash Global</title>
-    <!-- Tailwind CSS pour le style professionnel -->
-    <script src="https://jsdelivr.net"></script>
+    <title>LingoFlash Global - Proc</title>
     <style>
-        body { background-color: #0f1123; color: white; font-family: sans-serif; }
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e1b4b);
+            color: #ffffff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        main {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .controls-zone {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid #334155;
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #38bdf8;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        select, input {
+            background: #0f172a;
+            color: white;
+            border: 1px solid #475569;
+            padding: 10px 15px;
+            border-radius: 8px;
+            outline: none;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+
+        select {
+            width: 60%;
+            cursor: pointer;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        select:focus, input:focus {
+            border-color: #38bdf8;
+        }
+
+        .card-container {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid #475569;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .word-display {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 0.02em;
+        }
+
+        .translation-display {
+            color: #94a3b8;
+            font-style: italic;
+            font-size: 1rem;
+        }
+
+        .card-footer {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-t: 1px solid rgba(71, 85, 105, 0.4);
+        }
+
+        .counter {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            background: #0f172a;
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid #334155;
+        }
+
+        .audio-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .audio-btn:hover {
+            background: #1d4ed8;
+            transform: scale(1.05);
+        }
+
+        .next-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            align-self: center;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .next-btn:hover:not(:disabled) {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .next-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .premium-zone {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-cols: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 480px) {
+            .video-grid { grid-template-cols: 1fr; }
+        }
+
+        .video-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 15px;
+            position: relative;
+        }
+
+        .lock-icon {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .video-card h4 {
+            margin: 0 0 5px 0;
+            font-size: 0.95rem;
+        }
+
+        .video-card p {
+            margin: 0;
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        .premium-btn {
+            background: linear-gradient(90deg, #f59e0b, #f97316, #eab308);
+            color: #0f172a;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(249, 115, 22, 0.2);
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .premium-btn:hover {
+            opacity: 0.95;
+            transform: scale(1.01);
+        }
     </style>
 </head>
-<body class="min-h-screen antialiased pb-12">
+<body>
 
-    <!-- Header global -->
-    <header class="pt-8 text-center">
-        <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight flex items-center justify-center gap-2">
-            ⚡ LingoFlash Global ⚡
-        </h1>
-        <p class="text-gray-400 text-sm mt-2">
-            Banque de données interactive multilingue
-        </p>
+    <header>
+        <h1>⚡ LingoFlash Global ⚡</h1>
+        <div class="subtitle">Banque de données interactive multilingue</div>
     </header>
 
-    <!-- Zone Principale d'Apprentissage -->
-    <main class="max-w-2xl mx-auto px-4 mt-8 space-y-6">
-        
-        <!-- Boîtier de contrôle des filtres -->
-        <div class="bg-[#161a36] border border-[#232954] rounded-xl p-6 space-y-4 shadow-xl">
-            <!-- Menu déroulant des pays/langues -->
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <label class="text-blue-400 font-bold text-sm uppercase tracking-wider">
-                    Langue :
-                </label>
-                <select id="langSelect" class="bg-[#0f1123] border border-[#2d3566] text-white rounded-lg px-4 py-2.5 outline-none focus:border-blue-500 transition w-full sm:w-64 cursor-pointer">
-                    <!-- Les options seront générées par le JavaScript -->
-                </select>
+    <main>
+        <div class="controls-zone">
+            <div class="row">
+                <label for="langSelect">Langue :</label>
+                <select id="langSelect"></select>
             </div>
+            <input id="searchInput" type="text" placeholder="Filtrer les expressions...">
+        </div>
 
-            <!-- Barre de recherche -->
-            <div class="relative">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">🔍</span>
-                <input id="searchInput" type="text" placeholder="Filtrer les expressions..." class="w-full bg-[#0f1123] border border-[#2d3566] text-white rounded-lg pl-10 pr-4 py-2.5 outline-none focus:border-blue-500 transition text-sm">
+        <div class="card-container">
+            <div id="cardContent" style="margin: auto 0;"></div>
+            <div class="card-footer">
+                <span id="expressionCount" class="counter">Expression 0 / 0</span>
+                <button id="audioBtn" class="audio-btn" title="Écouter">🔊</button>
             </div>
         </div>
 
-        <!-- Fenêtre Flashcard de l'expression -->
-        <div class="bg-[#1b2044] border border-[#2d3566] rounded-2xl p-8 text-center shadow-2xl relative min-h-[220px] flex flex-col justify-between items-center transition-all duration-300">
-            <div class="space-y-4 my-auto" id="cardContent">
-                <!-- Rempli dynamiquement -->
-            </div>
+        <button id="nextBtn" class="next-btn">Mot Suivant ➡️</button>
 
-            <div class="w-full flex justify-between items-center mt-6 pt-4 border-t border-[#2d3566]/50">
-                <span id="expressionCount" class="text-xs text-gray-400 font-medium bg-[#0f1123] px-3 py-1 rounded-full">
-                    Expression 0 / 0
-                </span>
-
-                <!-- Bouton Audio -->
-                <button id="audioBtn" class="p-3 rounded-full bg-blue-600 hover:bg-blue-500 text-white hover:scale-105 transition-all" title="Écouter la prononciation">
-                    🔊
-                </button>
-            </div>
-        </div>
-
-        <!-- Bouton Mot Suivant -->
-        <div class="flex justify-center">
-            <button id="nextBtn" class="bg-[#2563eb] hover:bg-[#1d4ed8] disabled:opacity-50 text-white font-semibold px-8 py-3 rounded-lg flex items-center gap-2 shadow-lg shadow-blue-900/30 transition-all">
-                Mot Suivant ➡️
-            </button>
-        </div>
-
-        <!-- Section Cours Vidéos Avancés -->
-        <div class="pt-6 space-y-4">
-            <h3 id="videoSectionTitle" class="text-lg font-bold text-gray-300 flex items-center gap-2">
-                🎓 Cours Vidéos Avancés
-            </h3>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="bg-[#131730] border border-[#232954] rounded-xl p-5 relative overflow-hidden group">
-                    <div class="absolute top-3 right-3 text-gray-500">🔒</div>
-                    <h4 class="font-bold text-white mb-1">👤 Fluidité et Expressions</h4>
-                    <p class="text-xs text-gray-400">Contenu exclusif • Vidéo 4K Ultra HD</p>
+        <div class="premium-zone">
+            <label id="videoSectionTitle">🎓 Cours Vidéos Avancés</label>
+            <div class="video-grid">
+                <div class="video-card">
+                    <span class="lock-icon">🔒</span>
+                    <h4>Fluidité et Expressions</h4>
+                    <p>Contenu exclusif • Vidéo 4K</p>
                 </div>
-
-                <div class="bg-[#131730] border border-[#232954] rounded-xl p-5 relative overflow-hidden group">
-                    <div class="absolute top-3 right-3 text-gray-500">🔒</div>
-                    <h4 class="font-bold text-white mb-1">💼 Négociation et Parler Pro</h4>
-                    <p class="text-xs text-gray-400">Contenu exclusif • Vidéo 4K Ultra HD</p>
+                <div class="video-card">
+                    <span class="lock-icon">🔒</span>
+                    <h4>Négociation et Parler Pro</h4>
+                    <p>Contenu exclusif • Vidéo 4K</p>
                 </div>
             </div>
-
-            <!-- Bouton Premium -->
-            <button class="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 text-[#0f1123] font-black text-sm uppercase tracking-wider py-4 rounded-xl shadow-xl hover:opacity-95 transition-all hover:scale-[1.01] flex items-center justify-center gap-2 mt-2">
-                ⭐ Débloquer tout le contenu Mondial (9.99$ / mois)
-            </button>
+            <button class="premium-btn">⭐ Débloquer tout le contenu Mondial (9.99$ / mois)</button>
         </div>
     </main>
 
-    <!-- Logique JavaScript Interactive et Correction du Bug -->
     <script>
         const GLOBAL_LANGUAGES = {
             es: {
@@ -104,7 +301,7 @@
                 expressions: [
                     { id: 1, source: "Bonjour", target: "¡Hola!", audio: "Hola" },
                     { id: 2, source: "Merci beaucoup", target: "Muchas gracias", audio: "Muchas gracias" },
-                    { id: 3, source: "Comment ça va ?", target: "¿Cómo estás?", audio: "¿Cómo estás?" }
+                    { id: 3, source: "Comment ça va ?", target: "¿Cómo estás?", audio: "Cómo estás" }
                 ]
             },
             en: {
@@ -137,75 +334,6 @@
         const audioBtn = document.getElementById("audioBtn");
         const videoSectionTitle = document.getElementById("videoSectionTitle");
 
-        // Initialiser le sélecteur de langues
         function initLanguages() {
             langSelect.innerHTML = Object.entries(GLOBAL_LANGUAGES).map(([key, lang]) => 
                 `<option value="${key}">${lang.flag} ${lang.label}</option>`
-            ).join("");
-        }
-
-        // Mettre à jour l'affichage de la Flashcard
-        function updateUI() {
-            const langData = GLOBAL_LANGUAGES[currentLang];
-            videoSectionTitle.innerHTML = `🎓 Cours Vidéos Avancés (${langData.label})`;
-
-            filteredExpressions = langData.expressions.filter(exp => 
-                exp.source.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                exp.target.toLowerCase().includes(searchQuery.toLowerCase())
-            );
-
-            if (filteredExpressions.length > 0) {
-                if (currentIndex >= filteredExpressions.length) currentIndex = 0;
-                const currentExp = filteredExpressions[currentIndex];
-                
-                // CORRECTION DU BUG : On affiche la traduction cible (target) au centre en grand
-                cardContent.innerHTML = `
-                    <h2 class="text-4xl font-bold tracking-wide text-white">${currentExp.target}</h2>
-                    <p class="text-gray-400 text-sm italic">Signifie en Français : ${currentExp.source}</p>
-                `;
-                expressionCount.innerText = `Expression ${currentIndex + 1} / ${filteredExpressions.length}`;
-                nextBtn.disabled = filteredExpressions.length <= 1;
-                audioBtn.disabled = false;
-            } else {
-                cardContent.innerHTML = `<p class="text-gray-400">Aucune expression trouvée.</p>`;
-                expressionCount.innerText = "Expression 0 / 0";
-                nextBtn.disabled = true;
-                audioBtn.disabled = true;
-            }
-        }
-
-        // Événements
-        langSelect.addEventListener("change", (e) => {
-            currentLang = e.target.value;
-            currentIndex = 0;
-            updateUI();
-        });
-
-        searchInput.addEventListener("input", (e) => {
-            searchQuery = e.target.value;
-            currentIndex = 0;
-            updateUI();
-        });
-
-        nextBtn.addEventListener("click", () => {
-            if (filteredExpressions.length > 0) {
-                currentIndex = (currentIndex + 1) % filteredExpressions.length;
-                updateUI();
-            }
-        });
-
-        audioBtn.addEventListener("click", () => {
-            if (filteredExpressions[currentIndex]) {
-                const utterance = new SpeechSynthesisUtterance(filteredExpressions[currentIndex].audio);
-                utterance.lang = currentLang === "en" ? "en-US" : currentLang;
-                window.speechSynthesis.cancel();
-                window.speechSynthesis.speak(utterance);
-            }
-        });
-
-        // Lancement
-        initLanguages();
-        updateUI();
-    </script>
-</body>
-</html>
