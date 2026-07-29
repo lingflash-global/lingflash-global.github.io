@@ -3,185 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LingoFlash Global - Pro</title>
+    <title>LingoFlash Global</title>
+    <!-- Tailwind CSS pour le style professionnel -->
+    <script src="https://jsdelivr.net"></script>
     <style>
-        body {
-            background: linear-gradient(135deg, #0f172a, #1e1b4b);
-            color: #ffffff;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 { font-size: 2.5rem; text-shadow: 0 0 10px rgba(99, 102, 241, 0.5); margin-bottom: 5px; text-align: center; }
-        .subtitle { color: #94a3b8; margin-bottom: 25px; text-align: center; font-size: 1rem; }
-        
-        .controls-zone { display: flex; flex-direction: column; gap: 15px; align-items: center; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 30px; width: 100%; max-width: 400px; box-sizing: border-box; }
-        .row { display: flex; gap: 15px; width: 100%; justify-content: space-between; align-items: center; }
-        select, input { background: #1e1b4b; color: white; border: 1px solid #6366f1; padding: 10px 15px; border-radius: 8px; font-size: 1rem; outline: none; width: 60%; }
-        input { width: 100%; box-sizing: border-box; }
-        label { font-weight: bold; color: #38bdf8; }
-
-        .card-container { position: relative; width: 340px; }
-        .card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            width: 100%; height: 200px;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            font-size: 1.8rem; font-weight: bold; cursor: pointer;
-            transition: transform 0.3s; text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            box-sizing: border-box; padding: 20px;
-        }
-        .card:hover { transform: scale(1.02); }
-        .card-counter { font-size: 0.9rem; color: #94a3b8; margin-top: 15px; font-weight: normal; }
-        
-        .audio-btn {
-            position: absolute; bottom: 15px; right: 15px; background: rgba(99, 102, 241, 0.3);
-            border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 50%;
-            width: 45px; height: 45px; font-size: 1.3rem; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; transition: background 0.2s;
-        }
-        .audio-btn:hover { background: #6366f1; }
-
-        .btn-next {
-            margin: 20px 0 40px 0; background: #6366f1; color: white; border: none;
-            padding: 12px 40px; font-size: 1.1rem; font-weight: bold; border-radius: 8px; cursor: pointer;
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3); transition: background 0.2s;
-        }
-        .btn-next:hover { background: #4f46e5; }
-
-        .premium-container { width: 100%; max-width: 600px; text-align: left; }
-        .section-title { font-size: 1.4rem; color: #38bdf8; margin-bottom: 15px; font-weight: bold; }
-        .video-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
-        @media(min-width: 500px) { .video-grid { grid-template-columns: 1fr 1fr; } }
-        .video-box {
-            background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px; padding: 15px; position: relative; min-height: 90px;
-            display: flex; flex-direction: column; justify-content: center; cursor: not-allowed;
-        }
-        .video-box h3 { margin: 0 0 5px 0; font-size: 1rem; color: #f8fafc; }
-        .video-box p { margin: 0; font-size: 0.8rem; color: #94a3b8; }
-        .lock-icon { position: absolute; top: 15px; right: 15px; font-size: 1.2rem; }
-        
-        .paywall-btn {
-            grid-column: 1 / -1; background: linear-gradient(90deg, #f59e0b, #ef4444);
-            color: white; font-weight: bold; border: none; padding: 15px;
-            border-radius: 10px; cursor: pointer; text-align: center; font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); margin-top: 10px; transition: opacity 0.2s;
-        }
-        .paywall-btn:hover { opacity: 0.9; }
+        body { background-color: #0f1123; color: white; font-family: sans-serif; }
     </style>
 </head>
-<body>
+<body class="min-h-screen antialiased pb-12">
 
-    <h1>⚡ LingoFlash Global ⚡</h1>
-    <div class="subtitle">Banque de données interactive multilingue</div>
+    <!-- Header global -->
+    <header class="pt-8 text-center">
+        <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight flex items-center justify-center gap-2">
+            ⚡ LingoFlash Global ⚡
+        </h1>
+        <p class="text-gray-400 text-sm mt-2">
+            Banque de données interactive multilingue
+        </p>
+    </header>
 
-    <div class="controls-zone">
-        <div class="row">
-            <label for="langSelect">Langue :</label>
-            <select id="langSelect" onchange="changeLanguage()">
-                <option value="en">🇺🇸 Anglais</option>
-                <option value="es">🇪🇸 Espagnol</option>
-                <option value="fr">🇫🇷 Français</option>
-            </select>
-        </div>
-        <div class="row">
-            <input type="text" id="searchBar" placeholder="🔍 Filtrer les expressions..." oninput="filterWords()">
-        </div>
-    </div>
-
-    <div class="card-container">
-        <div class="card" id="flashcard" onclick="flipCard()">
-            <span id="cardText">Bonjour</span>
-            <div class="card-counter" id="cardIndexDisplay">Expression 1 / 1</div>
-        </div>
-        <button class="audio-btn" onclick="speakWord(event)">🔊</button>
-    </div>
-    <button class="btn-next" onclick="nextCard()">Mot Suivant ➡️</button>
-
-    <div class="premium-container">
-        <div class="section-title">📹 Cours Vidéos Avancés (<span id="premiumLangTitle">Anglais</span>)</div>
-        <div class="video-grid">
-            <div class="video-box">
-                <h3 id="vid1Title">🗣️ Fluidité et Expressions</h3>
-                <p>Contenu exclusif • Vidéo 4K Ultra HD</p>
-                <div class="lock-icon">🔒</div>
+    <!-- Zone Principale d'Apprentissage -->
+    <main class="max-w-2xl mx-auto px-4 mt-8 space-y-6">
+        
+        <!-- Boîtier de contrôle des filtres -->
+        <div class="bg-[#161a36] border border-[#232954] rounded-xl p-6 space-y-4 shadow-xl">
+            <!-- Menu déroulant des pays/langues -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <label class="text-blue-400 font-bold text-sm uppercase tracking-wider">
+                    Langue :
+                </label>
+                <select id="langSelect" class="bg-[#0f1123] border border-[#2d3566] text-white rounded-lg px-4 py-2.5 outline-none focus:border-blue-500 transition w-full sm:w-64 cursor-pointer">
+                    <!-- Les options seront générées par le JavaScript -->
+                </select>
             </div>
-            <div class="video-box">
-                <h3 id="vid2Title">💼 Négociation et Parler Pro</h3>
-                <p>Contenu exclusif • Vidéo 4K Ultra HD</p>
-                <div class="lock-icon">🔒</div>
+
+            <!-- Barre de recherche -->
+            <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">🔍</span>
+                <input id="searchInput" type="text" placeholder="Filtrer les expressions..." class="w-full bg-[#0f1123] border border-[#2d3566] text-white rounded-lg pl-10 pr-4 py-2.5 outline-none focus:border-blue-500 transition text-sm">
             </div>
-            <button class="paywall-btn" onclick="alert('Redirection vers Stripe... Accès immédiat aux cours.')">
-                🚀 Débloquer tout le contenu Mondial (9.99$ / mois)
+        </div>
+
+        <!-- Fenêtre Flashcard de l'expression -->
+        <div class="bg-[#1b2044] border border-[#2d3566] rounded-2xl p-8 text-center shadow-2xl relative min-h-[220px] flex flex-col justify-between items-center transition-all duration-300">
+            <div class="space-y-4 my-auto" id="cardContent">
+                <!-- Rempli dynamiquement -->
+            </div>
+
+            <div class="w-full flex justify-between items-center mt-6 pt-4 border-t border-[#2d3566]/50">
+                <span id="expressionCount" class="text-xs text-gray-400 font-medium bg-[#0f1123] px-3 py-1 rounded-full">
+                    Expression 0 / 0
+                </span>
+
+                <!-- Bouton Audio -->
+                <button id="audioBtn" class="p-3 rounded-full bg-blue-600 hover:bg-blue-500 text-white hover:scale-105 transition-all" title="Écouter la prononciation">
+                    🔊
+                </button>
+            </div>
+        </div>
+
+        <!-- Bouton Mot Suivant -->
+        <div class="flex justify-center">
+            <button id="nextBtn" class="bg-[#2563eb] hover:bg-[#1d4ed8] disabled:opacity-50 text-white font-semibold px-8 py-3 rounded-lg flex items-center gap-2 shadow-lg shadow-blue-900/30 transition-all">
+                Mot Suivant ➡️
             </button>
         </div>
-    </div>
 
+        <!-- Section Cours Vidéos Avancés -->
+        <div class="pt-6 space-y-4">
+            <h3 id="videoSectionTitle" class="text-lg font-bold text-gray-300 flex items-center gap-2">
+                🎓 Cours Vidéos Avancés
+            </h3>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="bg-[#131730] border border-[#232954] rounded-xl p-5 relative overflow-hidden group">
+                    <div class="absolute top-3 right-3 text-gray-500">🔒</div>
+                    <h4 class="font-bold text-white mb-1">👤 Fluidité et Expressions</h4>
+                    <p class="text-xs text-gray-400">Contenu exclusif • Vidéo 4K Ultra HD</p>
+                </div>
+
+                <div class="bg-[#131730] border border-[#232954] rounded-xl p-5 relative overflow-hidden group">
+                    <div class="absolute top-3 right-3 text-gray-500">🔒</div>
+                    <h4 class="font-bold text-white mb-1">💼 Négociation et Parler Pro</h4>
+                    <p class="text-xs text-gray-400">Contenu exclusif • Vidéo 4K Ultra HD</p>
+                </div>
+            </div>
+
+            <!-- Bouton Premium -->
+            <button class="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 text-[#0f1123] font-black text-sm uppercase tracking-wider py-4 rounded-xl shadow-xl hover:opacity-95 transition-all hover:scale-[1.01] flex items-center justify-center gap-2 mt-2">
+                ⭐ Débloquer tout le contenu Mondial (9.99$ / mois)
+            </button>
+        </div>
+    </main>
+
+    <!-- Logique JavaScript Interactive et Correction du Bug -->
     <script>
-        const baseWords = {
-            en: {
-                title: "Anglais",
-                code: "en-US",
-                vids: ["🗣️ Secrets d'Accent Anglais", "💼 Anglais Professionnel Intensif"],
-                list: [
-                    { native: "Welcome to the airport", target: "Bienvenue à l'aéroport ✈️" },
-                    { native: "Where is the hotel?", target: "Où est l'hôtel? 🏨" },
-                    { native: "The restaurant is open now", target: "Le restaurant est ouvert maintenant 🍕" },
-                    { native: "This business meeting is important", target: "Cette réunion d'affaires est importante 💼" },
-                    { native: "Have a nice day", target: "Bonne journée ✨" },
-                    { native: "Thank you very much", target: "Merci beaucoup 🙏" },
-                    { native: "How much does it cost?", target: "Combien ça coûte? 💰" },
-                    { native: "The train station is near here", target: "La gare est proche d'ici 🚄" },
-                    { native: "I am ready to learn", target: "Je suis prêt à apprendre 🧠" },
-                    { native: "Success is a choice", target: "Le succès est un choix 🏆" }
-                ]
-            },
+        const GLOBAL_LANGUAGES = {
             es: {
-                title: "Espagnol",
-                code: "es-ES",
-                vids: ["💃 Grammaire Espagnole Master", "🌴 Vocabulaire Immersion Totale"],
-                list: [
-                    { native: "Bienvenidos al aeropuerto", target: "Bienvenue à l'aéroport ✈️" },
-                    { native: "¿Dónde está el hotel?", target: "Où est l'hôtel? 🏨" },
-                    { native: "El restaurante está abierto", target: "Le restaurant est ouvert 🍕" },
-                    { native: "Esta reunión es importante", target: "Cette réunion est importante 💼" },
-                    { native: "Muchas gracias", target: "Merci beaucoup 🙏" },
-                    { native: "¿Cuánto cuesta esto?", target: "Combien ça coûte ceci? 💰" },
-                    { native: "La estación está cerca", target: "La gare est proche 🚄" },
-                    { native: "Estoy listo para aprender", target: "Je suis prêt à apprendre 🧠" },
-                    { native: "El éxito es una opción", target: "Le succès est une option 🏆" },
-                    { native: "Buenos días", target: "Bonjour / Bonne journée ✨" }
+                label: "Espagnol", flag: "🇪🇸",
+                expressions: [
+                    { id: 1, source: "Bonjour", target: "¡Hola!", audio: "Hola" },
+                    { id: 2, source: "Merci beaucoup", target: "Muchas gracias", audio: "Muchas gracias" },
+                    { id: 3, source: "Comment ça va ?", target: "¿Cómo estás?", audio: "¿Cómo estás?" }
                 ]
             },
-            fr: {
-                title: "Français",
-                code: "fr-FR",
-                vids: ["🥖 Fluidité Française Pro", "☕ Culture & Conversations"],
-                list: [
-                    { native: "Bienvenue à l'aéroport", target: "Welcome to the airport ✈️" },
-                    { native: "Où est l'hôtel?", target: "Where is the hotel? 🏨" },
-                    { native: "Le restaurant est ouvert", target: "The restaurant is open 🍕" },
-                    { native: "Merci beaucoup", target: "Thank you very much 🙏" },
-                    { native: "Combien ça coûte?", target: "How much does it cost? 💰" },
-                    { native: "La gare est proche d'ici", target: "The train station is near here 🚄" },
-                    { native: "Le succès est un choix", target: "Success is a choice 🏆" }
+            en: {
+                label: "Anglais", flag: "🇬🇧",
+                expressions: [
+                    { id: 1, source: "Bonjour", target: "Hello", audio: "Hello" },
+                    { id: 2, source: "Comment ça va ?", target: "How are you?", audio: "How are you" }
                 ]
+            },
+            de: {
+                label: "Allemand", flag: "🇩🇪",
+                expressions: [{ id: 1, source: "Bonjour", target: "Guten Tag", audio: "Guten Tag" }]
+            },
+            it: {
+                label: "Italien", flag: "🇮🇹",
+                expressions: [{ id: 1, source: "Bonjour", target: "Buongiorno", audio: "Buongiorno" }]
             }
         };
 
-        let currentLang = "en";
-        let activeList = [...baseWords[currentLang].list];
+        let currentLang = "es";
+        let searchQuery = "";
         let currentIndex = 0;
-        let isFlipped = false;
+        let filteredExpressions = [];
 
+        const langSelect = document.getElementById("langSelect");
+        const searchInput = document.getElementById("searchInput");
+        const cardContent = document.getElementById("cardContent");
+        const expressionCount = document.getElementById("expressionCount");
+        const nextBtn = document.getElementById("nextBtn");
+        const audioBtn = document.getElementById("audioBtn");
+        const videoSectionTitle = document.getElementById("videoSectionTitle");
+
+        // Initialiser le sélecteur de langues
+        function initLanguages() {
+            langSelect.innerHTML = Object.entries(GLOBAL_LANGUAGES).map(([key, lang]) => 
+                `<option value="${key}">${lang.flag} ${lang.label}</option>`
+            ).join("");
+        }
+
+        // Mettre à jour l'affichage de la Flashcard
         function updateUI() {
-            const langData = baseWords[currentLang];
-            document.getElementById('premiumLangTitle').innerText = langData.title;
+            const langData = GLOBAL_LANGUAGES[currentLang];
+            videoSectionTitle.innerHTML = `🎓 Cours Vidéos Avancés (${langData.label})`;
+
+            filteredExpressions = langData.expressions.filter(exp => 
+                exp.source.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                exp.target.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+
+            if (filteredExpressions.length > 0) {
+                if (currentIndex >= filteredExpressions.length) currentIndex = 0;
+                const currentExp = filteredExpressions[currentIndex];
+                
+                // CORRECTION DU BUG : On affiche la traduction cible (target) au centre en grand
+                cardContent.innerHTML = `
+                    <h2 class="text-4xl font-bold tracking-wide text-white">${currentExp.target}</h2>
+                    <p class="text-gray-400 text-sm italic">Signifie en Français : ${currentExp.source}</p>
+                `;
+                expressionCount.innerText = `Expression ${currentIndex + 1} / ${filteredExpressions.length}`;
+                nextBtn.disabled = filteredExpressions.length <= 1;
+                audioBtn.disabled = false;
+            } else {
+                cardContent.innerHTML = `<p class="text-gray-400">Aucune expression trouvée.</p>`;
+                expressionCount.innerText = "Expression 0 / 0";
+                nextBtn.disabled = true;
+                audioBtn.disabled = true;
+            }
+        }
+
+        // Événements
+        langSelect.addEventListener("change", (e) => {
+            currentLang = e.target.value;
+            currentIndex = 0;
+            updateUI();
+        });
+
+        searchInput.addEventListener("input", (e) => {
+            searchQuery = e.target.value;
+            currentIndex = 0;
+            updateUI();
+        });
+
+        nextBtn.addEventListener("click", () => {
+            if (filteredExpressions.length > 0) {
+                currentIndex = (currentIndex + 1) % filteredExpressions.length;
+                updateUI();
+            }
+        });
+
+        audioBtn.addEventListener("click", () => {
+            if (filteredExpressions[currentIndex]) {
+                const utterance = new SpeechSynthesisUtterance(filteredExpressions[currentIndex].audio);
+                utterance.lang = currentLang === "en" ? "en-US" : currentLang;
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(utterance);
+            }
+        });
+
+        // Lancement
+        initLanguages();
+        updateUI();
+    </script>
+</body>
+</html>
