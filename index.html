@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LingoFlash Global - Proc</title>
+    <title>LingoFlash Global - Pro</title>
     <style>
         body {
-            background: linear-gradient(135deg, #0f172a, #1e1b4b);
+            background-color: #0f1123;
             color: #ffffff;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -20,67 +20,70 @@
 
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-top: 20px;
+            margin-bottom: 25px;
         }
 
         h1 {
-            font-size: 2.5rem;
-            text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
-            margin-bottom: 5px;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: -0.025em;
         }
 
         .subtitle {
             color: #94a3b8;
-            font-size: 1rem;
+            font-size: 0.9rem;
+            margin-top: 8px;
         }
 
         main {
             width: 100%;
-            max-width: 500px;
+            max-width: 550px;
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
         .controls-zone {
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid #334155;
-            border-radius: 15px;
-            padding: 20px;
+            background-color: #161a36;
+            border: 1px solid #232954;
+            border-radius: 12px;
+            padding: 24px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            backdrop-filter: blur(10px);
+            gap: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
         }
 
         .row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 15px;
+            gap: 12px;
         }
 
         label {
-            font-weight: bold;
-            color: #38bdf8;
+            font-weight: 700;
+            color: #3b82f6;
             text-transform: uppercase;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             letter-spacing: 0.05em;
         }
 
         select, input {
-            background: #0f172a;
+            background-color: #0f1123;
             color: white;
-            border: 1px solid #475569;
-            padding: 10px 15px;
+            border: 1px solid #2d3566;
+            padding: 10px 14px;
             border-radius: 8px;
             outline: none;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: border-color 0.2s;
         }
 
         select {
-            width: 60%;
+            width: 160px;
             cursor: pointer;
         }
 
@@ -90,18 +93,17 @@
         }
 
         select:focus, input:focus {
-            border-color: #38bdf8;
+            border-color: #3b82f6;
         }
 
         .card-container {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid #475569;
-            border-radius: 20px;
-            padding: 30px;
+            background-color: #1b2044;
+            border: 1px solid #2d3566;
+            border-radius: 16px;
+            padding: 32px;
             text-align: center;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-            min-height: 180px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+            min-height: 160px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -109,16 +111,15 @@
         }
 
         .word-display {
-            font-size: 2.2rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            letter-spacing: 0.02em;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
         }
 
         .translation-display {
             color: #94a3b8;
             font-style: italic;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         .card-footer {
@@ -126,127 +127,137 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 20px;
-            padding-top: 15px;
-            border-t: 1px solid rgba(71, 85, 105, 0.4);
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(45, 53, 102, 0.5);
         }
 
         .counter {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #94a3b8;
-            background: #0f172a;
+            background-color: #0f1123;
             padding: 4px 12px;
-            border-radius: 20px;
-            border: 1px solid #334155;
+            border-radius: 9999px;
+            font-weight: 500;
         }
 
         .audio-btn {
-            background: #2563eb;
+            background-color: #2563eb;
             color: white;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: transform 0.2s, background-color 0.2s;
         }
 
         .audio-btn:hover {
-            background: #1d4ed8;
+            background-color: #1d4ed8;
             transform: scale(1.05);
         }
 
+        .next-btn-container {
+            display: flex;
+            justify-content: center;
+        }
+
         .next-btn {
-            background: #2563eb;
+            background-color: #2563eb;
             color: white;
             border: none;
-            padding: 12px 30px;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 8px;
+            padding: 10px 24px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 6px;
             cursor: pointer;
-            align-self: center;
-            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
-            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            transition: background-color 0.2s;
         }
 
         .next-btn:hover:not(:disabled) {
-            background: #1d4ed8;
-            transform: translateY(-2px);
+            background-color: #1d4ed8;
         }
 
         .next-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
-            box-shadow: none;
         }
 
         .premium-zone {
-            margin-top: 15px;
+            margin-top: 10px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
+        }
+
+        .premium-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #d1d5db;
         }
 
         .video-grid {
             display: grid;
             grid-template-cols: 1fr 1fr;
-            gap: 15px;
+            gap: 16px;
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 500px) {
             .video-grid { grid-template-cols: 1fr; }
         }
 
         .video-card {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 15px;
+            background-color: #131730;
+            border: 1px solid #232954;
+            border-radius: 8px;
+            padding: 20px;
             position: relative;
         }
 
         .lock-icon {
             position: absolute;
-            top: 12px;
-            right: 12px;
+            top: 16px;
+            right: 16px;
             color: #64748b;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .video-card h4 {
-            margin: 0 0 5px 0;
+            margin: 0 0 4px 0;
             font-size: 0.95rem;
+            color: #ffffff;
         }
 
         .video-card p {
             margin: 0;
             font-size: 0.75rem;
-            color: #64748b;
+            color: #94a3b8;
         }
 
         .premium-btn {
             background: linear-gradient(90deg, #f59e0b, #f97316, #eab308);
-            color: #0f172a;
+            color: #0f1123;
             border: none;
-            padding: 15px;
-            border-radius: 12px;
+            padding: 14px;
+            border-radius: 8px;
             font-weight: 900;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(249, 115, 22, 0.2);
-            transition: transform 0.2s, opacity 0.2s;
+            box-shadow: 0 10px 15px -3px rgba(249, 115, 22, 0.2);
+            transition: opacity 0.2s, transform 0.2s;
+            margin-top: 4px;
         }
 
         .premium-btn:hover {
             opacity: 0.95;
-            transform: scale(1.01);
+            transform: scale(1.005);
         }
     </style>
 </head>
@@ -270,24 +281,26 @@
             <div id="cardContent" style="margin: auto 0;"></div>
             <div class="card-footer">
                 <span id="expressionCount" class="counter">Expression 0 / 0</span>
-                <button id="audioBtn" class="audio-btn" title="Écouter">🔊</button>
+                <button id="audioBtn" class="audio-btn" title="Écouter la prononciation">🔊</button>
             </div>
         </div>
 
-        <button id="nextBtn" class="next-btn">Mot Suivant ➡️</button>
+        <div class="next-btn-container">
+            <button id="nextBtn" class="next-btn">Mot Suivant ➡️</button>
+        </div>
 
         <div class="premium-zone">
-            <label id="videoSectionTitle">🎓 Cours Vidéos Avancés</label>
+            <div id="videoSectionTitle" class="premium-title">🎓 Cours Vidéos Avancés</div>
             <div class="video-grid">
                 <div class="video-card">
                     <span class="lock-icon">🔒</span>
                     <h4>Fluidité et Expressions</h4>
-                    <p>Contenu exclusif • Vidéo 4K</p>
+                    <p>Contenu exclusif • Vidéo 4K Ultra HD</p>
                 </div>
                 <div class="video-card">
                     <span class="lock-icon">🔒</span>
                     <h4>Négociation et Parler Pro</h4>
-                    <p>Contenu exclusif • Vidéo 4K</p>
+                    <p>Contenu exclusif • Vidéo 4K Ultra HD</p>
                 </div>
             </div>
             <button class="premium-btn">⭐ Débloquer tout le contenu Mondial (9.99$ / mois)</button>
@@ -308,16 +321,23 @@
                 label: "Anglais", flag: "🇬🇧",
                 expressions: [
                     { id: 1, source: "Bonjour", target: "Hello", audio: "Hello" },
-                    { id: 2, source: "Comment ça va ?", target: "How are you?", audio: "How are you" }
+                    { id: 2, source: "Comment ça va ?", target: "How are you?", audio: "How are you" },
+                    { id: 3, source: "Merci", target: "Thank you", audio: "Thank you" }
                 ]
             },
             de: {
                 label: "Allemand", flag: "🇩🇪",
-                expressions: [{ id: 1, source: "Bonjour", target: "Guten Tag", audio: "Guten Tag" }]
+                expressions: [
+                    { id: 1, source: "Bonjour", target: "Guten Tag", audio: "Guten Tag" },
+                    { id: 2, source: "Merci", target: "Danke", audio: "Danke" }
+                ]
             },
             it: {
                 label: "Italien", flag: "🇮🇹",
-                expressions: [{ id: 1, source: "Bonjour", target: "Buongiorno", audio: "Buongiorno" }]
+                expressions: [
+                    { id: 1, source: "Bonjour", target: "Buongiorno", audio: "Buongiorno" },
+                    { id: 2, source: "Merci", target: "Grazie", audio: "Grazie" }
+                ]
             }
         };
 
@@ -327,13 +347,3 @@
         let filteredExpressions = [];
 
         const langSelect = document.getElementById("langSelect");
-        const searchInput = document.getElementById("searchInput");
-        const cardContent = document.getElementById("cardContent");
-        const expressionCount = document.getElementById("expressionCount");
-        const nextBtn = document.getElementById("nextBtn");
-        const audioBtn = document.getElementById("audioBtn");
-        const videoSectionTitle = document.getElementById("videoSectionTitle");
-
-        function initLanguages() {
-            langSelect.innerHTML = Object.entries(GLOBAL_LANGUAGES).map(([key, lang]) => 
-                `<option value="${key}">${lang.flag} ${lang.label}</option>`
