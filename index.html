@@ -20,10 +20,10 @@
         .subtitle { color: #94a3b8; margin-bottom: 25px; text-align: center; font-size: 1rem; }
         
         /* Contrôles */
-        .controls-zone { display: flex; flex-direction: column; gap: 15px; align-items: center; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 30px; width: 100%; max-width: 400px; }
+        .controls-zone { display: flex; flex-direction: column; gap: 15px; align-items: center; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 30px; width: 100%; max-width: 400px; box-sizing: border-box; }
         .row { display: flex; gap: 15px; width: 100%; justify-content: space-between; align-items: center; }
         select, input { background: #1e1b4b; color: white; border: 1px solid #6366f1; padding: 10px 15px; border-radius: 8px; font-size: 1rem; outline: none; width: 60%; }
-        input { width: 90%; }
+        input { width: 100%; box-sizing: border-box; }
         label { font-weight: bold; color: #38bdf8; }
 
         /* Section Flashcards */
@@ -35,13 +35,13 @@
             border-radius: 20px;
             width: 100%; height: 200px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            font-size: 1.8rem; font-weight: bold; cursor: pointer;
+            font-size: 1.5rem; font-weight: bold; cursor: pointer;
             transition: transform 0.3s; text-align: center;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             box-sizing: border-box; padding: 20px;
         }
         .card:hover { transform: scale(1.02); }
-        .card-counter { font-size: 0.9rem; color: #94a3b8; margin-top: 10px; font-weight: normal; }
+        .card-counter { font-size: 0.9rem; color: #94a3b8; margin-top: 15px; font-weight: normal; }
         
         /* Bouton Audio */
         .audio-btn {
@@ -98,7 +98,7 @@
                 <option value="fr">🇫🇷 Français (1000+ Mots)</option>
             </select>
         </div>
-        <div class="row" style="justify-content: center;">
+        <div class="row">
             <input type="text" id="searchBar" placeholder="🔍 Rechercher un mot spécifique..." oninput="filterWords()">
         </div>
     </div>
@@ -106,8 +106,8 @@
     <!-- Zone Flashcards Gratuite -->
     <div class="card-container">
         <div class="card" id="flashcard" onclick="flipCard()">
-            <span id="cardText">Loading...</span>
-            <div class="card-counter" id="cardIndexDisplay">Mot 1 / 1000</div>
+            <span id="cardText">Chargement...</span>
+            <div class="card-counter" id="cardIndexDisplay">Expression 1 / 1000</div>
         </div>
         <button class="audio-btn" onclick="speakWord(event)">🔊</button>
     </div>
@@ -134,7 +134,6 @@
     </div>
 
     <script>
-        // Générateur automatique de vocabulaire de masse (1000+ mots combinés)
         const subjects = {
             en: ["The airport", "The hotel", "A business meeting", "The restaurant", "A new friend", "The doctor", "Shopping time", "Family dinner", "The train station", "Morning routine"],
             es: ["El aeropuerto", "El hotel", "Una reunión", "El restaurante", "Un nuevo amigo", "El médico", "De compras", "Cena familiar", "La estación", "Rutina diaria"],
@@ -153,15 +152,15 @@
             fr: { title: "Français", code: "fr-FR", vids: ["🥖 Fluidité Française Pro", "☕ Culture & Conversations"], list: [] }
         };
 
-        // Algorithme de génération de 1000 expressions par langue
+        // Générateur sécurisé et nettoyé
         for (let l of ['en', 'es', 'fr']) {
             let targetLang = l === 'fr' ? 'en' : 'fr';
-            let id = 0;
+            let id = 1;
             for (let i = 0; i < 10; i++) {
                 for (let j = 0; j < 10; j++) {
-                    for (let k = 0; k < 11; k++) {
-                        let nativePhrase = `${subjects[l][i]} ${actions[l][j]} (${id})`;
-                        let targetPhrase = `${subjects[targetLang][i]} ${actions[targetLang][j]} (${id})`;
+                    for (let k = 0; k < 10; k++) {
+                        let nativePhrase = `${subjects[l][i]} ${actions[l][j]} [#${id}]`;
+                        let targetPhrase = `${subjects[targetLang][i]} ${actions[targetLang][j]} [#${id}]`;
                         baseWords[l].list.push({ native: nativePhrase, target: targetPhrase });
                         id++;
                     }
@@ -187,54 +186,3 @@
             } else {
                 if (currentIndex >= activeList.length) currentIndex = 0;
                 document.getElementById('cardText').innerText = activeList[currentIndex].native;
-document.getElementById('cardIndexDisplay').innerText = Expression ${currentIndex + 1} / ${activeList.length};
-}
-document.getElementById('flashcard').style.color = "#ffffff";
-}
-function changeLanguage() {
-currentLang = document.getElementById('langSelect').value;
-document.getElementById('searchBar').value = "";
-activeList = [...baseWords[currentLang].list];
-currentIndex = 0;
-updateUI();
-}
-function filterWords() {
-const query = document.getElementById('searchBar').value.toLowerCase();
-const allWords = baseWords[currentLang].list;
-activeList = allWords.filter(item =>
-item.native.toLowerCase().includes(query) ||
-item.target.toLowerCase().includes(query)
-);
-currentIndex = 0;
-updateUI();
-}
-function flipCard() {
-if (activeList.length === 0) return;
-const cardText = document.getElementById('cardText');
-const flashcard = document.getElementById('flashcard');
-isFlipped = !isFlipped;
-if (isFlipped) {
-cardText.innerText = activeList[currentIndex].target;
-flashcard.style.color = "#38bdf8";
-} else {
-cardText.innerText = activeList[currentIndex].native;
-flashcard.style.color = "#ffffff";
-}
-}
-function nextCard() {
-if (activeList.length === 0) return;
-currentIndex = (currentIndex + 1) % activeList.length;
-isFlipped = false;
-updateUI();
-}
-function speakWord(event) {
-event.stopPropagation();
-if (activeList.length === 0) return;
-const langData = baseWords[currentLang];
-const wordToSpeak = isFlipped ? activeList[currentIndex].target : activeList[currentIndex].native;
-const accentCode = isFlipped ? (currentLang === "fr" ? "en-US" : "fr-FR") : langData.code;
-const utterance = new SpeechSynthesisUtterance(wordToSpeak);
-utterance.lang = accentCode;
-window.speechSynthesis.speak(utterance);
-}
-updateUI();
