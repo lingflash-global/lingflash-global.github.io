@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LingoFlash Global - Pro 1000+ Mots</title>
+    <title>LingoFlash Global - Pro</title>
     <style>
         body {
             background: linear-gradient(135deg, #0f172a, #1e1b4b);
@@ -19,14 +19,12 @@
         h1 { font-size: 2.5rem; text-shadow: 0 0 10px rgba(99, 102, 241, 0.5); margin-bottom: 5px; text-align: center; }
         .subtitle { color: #94a3b8; margin-bottom: 25px; text-align: center; font-size: 1rem; }
         
-        /* Contrôles */
         .controls-zone { display: flex; flex-direction: column; gap: 15px; align-items: center; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 30px; width: 100%; max-width: 400px; box-sizing: border-box; }
         .row { display: flex; gap: 15px; width: 100%; justify-content: space-between; align-items: center; }
         select, input { background: #1e1b4b; color: white; border: 1px solid #6366f1; padding: 10px 15px; border-radius: 8px; font-size: 1rem; outline: none; width: 60%; }
         input { width: 100%; box-sizing: border-box; }
         label { font-weight: bold; color: #38bdf8; }
 
-        /* Section Flashcards */
         .card-container { position: relative; width: 340px; }
         .card {
             background: rgba(255, 255, 255, 0.08);
@@ -35,7 +33,7 @@
             border-radius: 20px;
             width: 100%; height: 200px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            font-size: 1.5rem; font-weight: bold; cursor: pointer;
+            font-size: 1.8rem; font-weight: bold; cursor: pointer;
             transition: transform 0.3s; text-align: center;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             box-sizing: border-box; padding: 20px;
@@ -43,7 +41,6 @@
         .card:hover { transform: scale(1.02); }
         .card-counter { font-size: 0.9rem; color: #94a3b8; margin-top: 15px; font-weight: normal; }
         
-        /* Bouton Audio */
         .audio-btn {
             position: absolute; bottom: 15px; right: 15px; background: rgba(99, 102, 241, 0.3);
             border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 50%;
@@ -59,7 +56,6 @@
         }
         .btn-next:hover { background: #4f46e5; }
 
-        /* Section Premium Vidéos */
         .premium-container { width: 100%; max-width: 600px; text-align: left; }
         .section-title { font-size: 1.4rem; color: #38bdf8; margin-bottom: 15px; font-weight: bold; }
         .video-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
@@ -73,7 +69,6 @@
         .video-box p { margin: 0; font-size: 0.8rem; color: #94a3b8; }
         .lock-icon { position: absolute; top: 15px; right: 15px; font-size: 1.2rem; }
         
-        /* Bouton d'achat */
         .paywall-btn {
             grid-column: 1 / -1; background: linear-gradient(90deg, #f59e0b, #ef4444);
             color: white; font-weight: bold; border: none; padding: 15px;
@@ -86,39 +81,36 @@
 <body>
 
     <h1>⚡ LingoFlash Global ⚡</h1>
-    <div class="subtitle">Banque de données massive - Plus de 1000 mots et expressions</div>
+    <div class="subtitle">Banque de données interactive multilingue</div>
 
-    <!-- Zone de Configuration -->
     <div class="controls-zone">
         <div class="row">
             <label for="langSelect">Langue :</label>
             <select id="langSelect" onchange="changeLanguage()">
-                <option value="en">🇺🇸 Anglais (1000+ Mots)</option>
-                <option value="es">🇪🇸 Espagnol (1000+ Mots)</option>
-                <option value="fr">🇫🇷 Français (1000+ Mots)</option>
+                <option value="en">🇺🇸 Anglais</option>
+                <option value="es">🇪🇸 Espagnol</option>
+                <option value="fr">🇫🇷 Français</option>
             </select>
         </div>
         <div class="row">
-            <input type="text" id="searchBar" placeholder="🔍 Rechercher un mot spécifique..." oninput="filterWords()">
+            <input type="text" id="searchBar" placeholder="🔍 Filtrer les expressions..." oninput="filterWords()">
         </div>
     </div>
 
-    <!-- Zone Flashcards Gratuite -->
     <div class="card-container">
         <div class="card" id="flashcard" onclick="flipCard()">
-            <span id="cardText">Chargement...</span>
-            <div class="card-counter" id="cardIndexDisplay">Expression 1 / 1000</div>
+            <span id="cardText">Bonjour</span>
+            <div class="card-counter" id="cardIndexDisplay">Expression 1 / 1</div>
         </div>
         <button class="audio-btn" onclick="speakWord(event)">🔊</button>
     </div>
     <button class="btn-next" onclick="nextCard()">Mot Suivant ➡️</button>
 
-    <!-- Zone Vidéo Payante -->
     <div class="premium-container">
         <div class="section-title">📹 Cours Vidéos Avancés (<span id="premiumLangTitle">Anglais</span>)</div>
         <div class="video-grid">
             <div class="video-box">
-                <h3 id="vid1Title">🗣️ Fluidité et Expressions Idiomatiques</h3>
+                <h3 id="vid1Title">🗣️ Fluidité et Expressions</h3>
                 <p>Contenu exclusif • Vidéo 4K Ultra HD</p>
                 <div class="lock-icon">🔒</div>
             </div>
@@ -127,46 +119,63 @@
                 <p>Contenu exclusif • Vidéo 4K Ultra HD</p>
                 <div class="lock-icon">🔒</div>
             </div>
-            <button class="paywall-btn" onclick="alert('Redirection vers Stripe... Accès immédiat aux 1000+ leçons vidéos.')">
+            <button class="paywall-btn" onclick="alert('Redirection vers Stripe... Accès immédiat aux cours.')">
                 🚀 Débloquer tout le contenu Mondial (9.99$ / mois)
             </button>
         </div>
     </div>
 
     <script>
-        const subjects = {
-            en: ["The airport", "The hotel", "A business meeting", "The restaurant", "A new friend", "The doctor", "Shopping time", "Family dinner", "The train station", "Morning routine"],
-            es: ["El aeropuerto", "El hotel", "Una reunión", "El restaurante", "Un nuevo amigo", "El médico", "De compras", "Cena familiar", "La estación", "Rutina diaria"],
-            fr: ["L'aéroport", "L'hôtel", "Une réunion", "Le restaurant", "Un nouvel ami", "Le médecin", "Faire les courses", "Dîner en famille", "La gare", "La routine"]
-        };
-        
-        const actions = {
-            en: ["is very big", "costs a lot", "is open now", "looks beautiful", "is friendly", "feels dynamic", "is clean", "is near here", "is perfect", "is ready"],
-            es: ["es muy grande", "cuesta mucho", "está abierto", "es hermoso", "es simpático", "es dinámico", "está limpio", "está cerca", "es perfecto", "está listo"],
-            fr: ["est très grand", "coûte cher", "est ouvert", "est magnifique", "est sympathique", "est dynamique", "est propre", "est proche", "est parfait", "est prêt"]
-        };
-
         const baseWords = {
-            en: { title: "Anglais", code: "en-US", vids: ["🗣️ Secrets d'Accent Anglais", "💼 Anglais Professionnel Intensif"], list: [] },
-            es: { title: "Espagnol", code: "es-ES", vids: ["💃 Grammaire Espagnole Master", "🌴 Vocabulaire Immersion Totale"], list: [] },
-            fr: { title: "Français", code: "fr-FR", vids: ["🥖 Fluidité Française Pro", "☕ Culture & Conversations"], list: [] }
-        };
-
-        // Générateur sécurisé et nettoyé
-        for (let l of ['en', 'es', 'fr']) {
-            let targetLang = l === 'fr' ? 'en' : 'fr';
-            let id = 1;
-            for (let i = 0; i < 10; i++) {
-                for (let j = 0; j < 10; j++) {
-                    for (let k = 0; k < 10; k++) {
-                        let nativePhrase = `${subjects[l][i]} ${actions[l][j]} [#${id}]`;
-                        let targetPhrase = `${subjects[targetLang][i]} ${actions[targetLang][j]} [#${id}]`;
-                        baseWords[l].list.push({ native: nativePhrase, target: targetPhrase });
-                        id++;
-                    }
-                }
+            en: {
+                title: "Anglais",
+                code: "en-US",
+                vids: ["🗣️ Secrets d'Accent Anglais", "💼 Anglais Professionnel Intensif"],
+                list: [
+                    { native: "Welcome to the airport", target: "Bienvenue à l'aéroport ✈️" },
+                    { native: "Where is the hotel?", target: "Où est l'hôtel? 🏨" },
+                    { native: "The restaurant is open now", target: "Le restaurant est ouvert maintenant 🍕" },
+                    { native: "This business meeting is important", target: "Cette réunion d'affaires est importante 💼" },
+                    { native: "Have a nice day", target: "Bonne journée ✨" },
+                    { native: "Thank you very much", target: "Merci beaucoup 🙏" },
+                    { native: "How much does it cost?", target: "Combien ça coûte? 💰" },
+                    { native: "The train station is near here", target: "La gare est proche d'ici 🚄" },
+                    { native: "I am ready to learn", target: "Je suis prêt à apprendre 🧠" },
+                    { native: "Success is a choice", target: "Le succès est un choix 🏆" }
+                ]
+            },
+            es: {
+                title: "Espagnol",
+                code: "es-ES",
+                vids: ["💃 Grammaire Espagnole Master", "🌴 Vocabulaire Immersion Totale"],
+                list: [
+                    { native: "Bienvenidos al aeropuerto", target: "Bienvenue à l'aéroport ✈️" },
+                    { native: "¿Dónde está el hotel?", target: "Où est l'hôtel? 🏨" },
+                    { native: "El restaurante está abierto", target: "Le restaurant est ouvert 🍕" },
+                    { native: "Esta reunión es importante", target: "Cette réunion est importante 💼" },
+                    { native: "Muchas gracias", target: "Merci beaucoup 🙏" },
+                    { native: "¿Cuánto cuesta esto?", target: "Combien ça coûte ceci? 💰" },
+                    { native: "La estación está cerca", target: "La gare est proche 🚄" },
+                    { native: "Estoy listo para aprender", target: "Je suis prêt à apprendre 🧠" },
+                    { native: "El éxito es una opción", target: "Le succès est une option 🏆" },
+                    { native: "Buenos días", target: "Bonjour / Bonne journée ✨" }
+                ]
+            },
+            fr: {
+                title: "Français",
+                code: "fr-FR",
+                vids: ["🥖 Fluidité Française Pro", "☕ Culture & Conversations"],
+                list: [
+                    { native: "Bienvenue à l'aéroport", target: "Welcome to the airport ✈️" },
+                    { native: "Où est l'hôtel?", target: "Where is the hotel? 🏨" },
+                    { native: "Le restaurant est ouvert", target: "The restaurant is open 🍕" },
+                    { native: "Merci beaucoup", target: "Thank you very much 🙏" },
+                    { native: "Combien ça coûte?", target: "How much does it cost? 💰" },
+                    { native: "La gare est proche d'ici", target: "The train station is near here 🚄" },
+                    { native: "Le succès est un choix", target: "Success is a choice 🏆" }
+                ]
             }
-        }
+        };
 
         let currentLang = "en";
         let activeList = [...baseWords[currentLang].list];
@@ -176,13 +185,3 @@
         function updateUI() {
             const langData = baseWords[currentLang];
             document.getElementById('premiumLangTitle').innerText = langData.title;
-            document.getElementById('vid1Title').innerText = langData.vids[0];
-            document.getElementById('vid2Title').innerText = langData.vids[1];
-            
-            isFlipped = false;
-            if (activeList.length === 0) {
-                document.getElementById('cardText').innerText = "Aucun mot trouvé ❌";
-                document.getElementById('cardIndexDisplay').innerText = "0 / 0";
-            } else {
-                if (currentIndex >= activeList.length) currentIndex = 0;
-                document.getElementById('cardText').innerText = activeList[currentIndex].native;
